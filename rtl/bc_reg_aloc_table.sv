@@ -50,11 +50,12 @@ always_ff @( posedge clk_i ) begin
   else begin
     if ( update_tag_i )
       tag[new_tag_addr_i] <= new_tag_i;
-    else if ( commit_req_i ) begin
+    if ( commit_req_i ) begin
       if ( rob_str_i == tag[commit_addr_i] )
         tag[commit_addr_i] <= RF_TAG_WIDTH'( '0 );
     end
-    else if ( branch_misspredict_i )
+    if ( branch_misspredict_i )
+      tag <= tag_archive;
   end
 end
 
@@ -95,6 +96,8 @@ assign op1_tag_o = tag[rs_op1_addr_i] & op1_valid_o;
 assign op2_tag_o = tag[rs_op2_addr_i] & op2_valid_o;
 
 assign commit_valid_o = commit_req_i & (tag)
+
+// Future optimisation - if opN_tag_o is empty => we can send data to RS same moment so we dont need to wait it in RS
 
 ////  SIMULATION ASSERT  ////
 
