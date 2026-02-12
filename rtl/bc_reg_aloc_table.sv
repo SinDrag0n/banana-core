@@ -67,9 +67,7 @@ always_ff @( posedge clk_i ) begin
   end
   else begin
     if ( branch_instr_i ) begin
-      for ( int i = 0; i < RF_REGS_NUM; i++ ) begin
-        tag_archive[i] <= tag[i];
-      end
+      tag_archive <= tag;
     end
   end
 end
