@@ -10,7 +10,7 @@ parameter int unsigned CDB_USERS     = 2;
 
 parameter int unsigned RS_NUM        = 2;
 
-parameter int unsigned OP_ADDR       = $clog2( CDB_USERS );
+parameter int unsigned RF_TAG_WIDTH     = $clog2( RS_NUM + 1 );
 
 
 
