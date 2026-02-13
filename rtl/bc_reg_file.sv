@@ -21,7 +21,7 @@ import bc_pkg::*;
 
   /// RS PORT ///
 
-  input  logic                       rs_read_req,
+  input  logic                       rs_read_req_i,
   input  logic [RF_ADDR_WIDTH - 1:0] rs_op1_addr_i,
   input  logic [RF_ADDR_WIDTH - 1:0] rs_op2_addr_i,
 
