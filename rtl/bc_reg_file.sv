@@ -10,8 +10,9 @@ import bc_pkg::*;
   /// ROB PORT ///
 
   input  logic                       rob_commit_rq_i,
-  input  logic [ RF_TAG_WIDTH - 1:0] rob_comitted_str_i,
+  input  logic [ RF_TAG_WIDTH - 1:0] rob_commit_tag_i,
   input  logic [RF_ADDR_WIDTH - 1:0] rob_commit_addr_i,
+  input  logic [   DATA_WIDTH - 1:0] rob_commit_data_i,
 
   input  logic                       rob_dispatch_rq_i,
   input  logic [ RF_TAG_WIDTH - 1:0] rob_dispatch_str_i,
@@ -35,6 +36,9 @@ import bc_pkg::*;
 
 ////   LOCAL VARIABLES   ////
 
+// Commit logic
+logic commit_valid;
+
 //// MODULES INITIATIONS ////
 
 bc_reg_storage     bc_reg_storage_inst (
@@ -44,8 +48,8 @@ bc_reg_storage     bc_reg_storage_inst (
   .raddr_port2_i        ( raddr_port2_i        ),
   .rdata_port2_o        ( rdata_port2_o        ),
   .waddr_i              ( waddr_i              ),
-  .wdata_i              ( wdata_i              ),
-  .wvalid_i             ( wvalid_i             )
+  .wdata_i              ( rob_rd_data_i        ),
+  .wvalid_i             ( commit_valid         )
 );
 
 bc_reg_aloc_table  bc_reg_aloc_table_inst (
@@ -67,10 +71,12 @@ bc_reg_aloc_table  bc_reg_aloc_table_inst (
   .commit_addr_i        ( commit_addr_i        ),
   .rob_str_i            ( rob_str_i            ),
   .commit_req_i         ( rob_commit_req       ),
-  .commit_valid_o       ( commit_valid_o       )
+  .commit_valid_o       ( commit_valid         )
 );
 
 ////     INNER LOGIC     ////
+
+
 
 ////     OUTPUT PORTS    ////
 
