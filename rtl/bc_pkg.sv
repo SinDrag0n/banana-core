@@ -3,14 +3,17 @@ package bc_pkg;
 parameter int unsigned DATA_WIDTH    = 32;
 parameter int unsigned INSTR_WIDTH   = 32;
 
+parameter int unsigned ROB_ENTRIES   = 8;
+
 parameter int unsigned RF_REGS_NUM   = 32;
-parameter int unsigned RF_ADDR_WIDTH = 32;
+parameter int unsigned RF_ADDR_WIDTH = $clog2( RF_REGS_NUM );
+parameter int unsigned RF_TAG_WIDTH  = $clog2( ROB_ENTRIES );
+
 
 parameter int unsigned CDB_USERS     = 2;
 
 parameter int unsigned RS_NUM        = 2;
 
-parameter int unsigned RF_TAG_WIDTH     = $clog2( RS_NUM + 1 );
 
 
 
