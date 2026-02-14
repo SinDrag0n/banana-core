@@ -8,7 +8,7 @@ import bc_pkg::*;
   input  logic                       branch_instr_i,
 
   input  logic                       rob_dispatch_rq_i,
-  input  logic [RF_ADDR_WIDTH - 1:0] rob_dispatch_tag_i,
+  input  logic [ RF_TAG_WIDTH - 1:0] rob_dispatch_tag_i,
   input  logic [RF_ADDR_WIDTH - 1:0] rob_dispatch_rd_addr_i,
 
   input  logic [RF_ADDR_WIDTH - 1:0] rob_commit_addr_i,
@@ -71,7 +71,7 @@ assign op2_valid_o = ( tag[op2_addr_i] != 0 ) & ( rob_dispatch_rq_i | rs_read_rq
 assign op1_tag_o = tag[op1_addr_i] & op1_valid_o;
 assign op2_tag_o = tag[op2_addr_i] & op2_valid_o;
 
-assign commit_valid_o = rob_commit_rq_i & ( tag[rob_commit_addr_i] == rob_commit_tag_i );
+assign commit_allow_o = rob_commit_rq_i & ( tag[rob_commit_addr_i] == rob_commit_tag_i );
 
 ////  SIMULATION ASSERT  ////
 
