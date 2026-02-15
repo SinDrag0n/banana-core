@@ -57,7 +57,7 @@ end
 
 ////    OUTPUT PORTS     ////
 
-assign branch_prediction_o = pht[pht_prd_index][1];
+assign branch_prediction_o = ( predict_req_i ) ? ( pht[pht_prd_index][1] ) : ( 0 );
 
 ////  SIMULATION ASSERT  ////
 
