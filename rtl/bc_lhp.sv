@@ -29,7 +29,7 @@ logic [   BP_PHT_ADDR_WIDTH - 1:0] pht_upd_index;
 assign lht_prd_index = instr_pc_i [2 + BP_LHT_ADDR_WIDTH - 1:2];
 assign lht_upd_index = update_pc_i[2 + BP_LHT_ADDR_WIDTH - 1:2];
 
-always_ff @( posedge clk_i ) begin
+always_ff @( posedge clk_i or negedge rstn_i ) begin
   if ( ~rstn_i ) begin
     lht <= '{default: '0};
   end
@@ -41,7 +41,7 @@ end
 assign pht_prd_index = pht[lht_prd_index];
 assign pht_upd_index = pht[lht_upd_index];
 
-always_ff @( posedge clk_i ) begin
+always_ff @( posedge clk_i or negedge rstn_i ) begin
   if ( ~rstn_i ) begin
     pht <= '{default '0};
   end

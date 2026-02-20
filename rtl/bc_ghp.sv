@@ -26,7 +26,7 @@ logic [   BP_PHT_ADDR_WIDTH - 1:0] pht_upd_index;
 
 ////     INNER LOGIC     ////
 
-always_ff @( posedge clk_i ) begin
+always_ff @( posedge clk_i or negedge rstn_i ) begin
   if ( ~rstn_i ) begin
     ght <= '{default: '0};
   end
@@ -38,7 +38,7 @@ end
 assign pht_prd_index = pht[ght ^ predict_req_i[2 + BP_GHT_PATTERN_WIDTH - 1:2]];
 assign pht_upd_index = pht[ght ^ update_pc_i  [2 + BP_GHT_PATTERN_WIDTH - 1:2]];
 
-always_ff @( posedge clk_i ) begin
+always_ff @( posedge clk_i or negedge rstn_i ) begin
   if ( ~rstn_i ) begin
     pht <= '{default '0};
   end
